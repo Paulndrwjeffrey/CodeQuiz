@@ -19,16 +19,29 @@ padding: 20px 30px 10px 30px;
 
 h2 {
     font-size: 2.5vw;
-    padding: 25px 20px 20px 20px;
+    padding: 28px 20px 20px 20px;
+}
+
+h2:hover {
+    color: Yellow;
+    transform: skewx(6deg)
 }
 #clock {
     background-color: orangered;
 }
 
+#clock:hover {
+    background-color: black;
+}
+
 p {
-    
     font-size: 5vw;
     padding: 10px 30px 10px 30px;
+}
+
+p:hover{
+    color: orangered;
+    text-decoration: underline;
 }
 
 #quizTV {
@@ -40,6 +53,7 @@ p {
 }
 
 #quizint {
+    margin: 0px 40px 0px 40px;
     background-color: whitesmoke;
 }
 
@@ -65,3 +79,17 @@ button {
     align-items: center;
     background-color: whitesmoke;
 }
+
+button:hover {
+    background-color: white;
+}
+
+button:focus {
+    outline: none;
+}
+
+button:active {
+    outline: none;
+    background-color: lawngreen;
+}
+
