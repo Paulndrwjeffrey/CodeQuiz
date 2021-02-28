@@ -1,0 +1,67 @@
+* {
+    margin: 0px;
+    border: 0px;
+    padding: 0px;
+    font-family: 'Rubik Mono One', sans-serif;
+    font-size: 16px;
+}
+
+#beheader {
+    display: flex;
+    justify-content: space-between;
+    background-color: cyan;
+}
+
+h1 {
+font-size: 3.5vw;
+padding: 20px 30px 10px 30px;
+}
+
+h2 {
+    font-size: 2.5vw;
+    padding: 25px 20px 20px 20px;
+}
+#clock {
+    background-color: orangered;
+}
+
+p {
+    
+    font-size: 5vw;
+    padding: 10px 30px 10px 30px;
+}
+
+#quizTV {
+    display: flex;
+    flex-direction: column;
+    min-height: calc(100vh - 50px);
+    justify-content: space-around;
+    background-color: gainsboro;
+}
+
+#quizint {
+    background-color: whitesmoke;
+}
+
+pre {
+    font-size: 3.5vw;
+    padding: 25px;
+    display: inherit;
+    text-align: center;
+    white-space: normal;
+}
+
+#button-box {
+    margin: 0px;    
+    justify-content: center;
+}
+
+button {
+    margin: 0 auto;
+    display: block;
+    font-size: 4vw;
+    display: inherit;
+    appearance: auto;
+    align-items: center;
+    background-color: whitesmoke;
+}
