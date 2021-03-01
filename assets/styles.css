@@ -13,13 +13,13 @@
 }
 
 h1 {
-font-size: 3.5vw;
+font-size: 4vw;
 padding: 20px 30px 10px 30px;
 }
 
 h2 {
     font-size: 2.5vw;
-    padding: 28px 20px 20px 20px;
+    padding: 32px 20px 20px 20px;
 }
 
 h2:hover {
@@ -35,7 +35,7 @@ h2:hover {
 }
 
 p {
-    font-size: 5vw;
+    font-size: 6.5vw;
     padding: 10px 30px 10px 30px;
 }
 
@@ -48,13 +48,15 @@ p:hover{
     display: flex;
     flex-direction: column;
     min-height: calc(100vh - 50px);
-    justify-content: space-around;
+    justify-content: center;
+    align-items: center;
     background-color: gainsboro;
 }
 
 #quizint {
     margin: 0px 40px 0px 40px;
     background-color: whitesmoke;
+    border-radius: 10px;
 }
 
 pre {
@@ -65,31 +67,29 @@ pre {
     white-space: normal;
 }
 
-#button-box {
-    margin: 0px;    
+.button-box {
+    margin: 50px;    
     justify-content: center;
 }
 
-button {
-    margin: 0 auto;
+.button {
     display: block;
-    font-size: 4vw;
-    display: inherit;
-    appearance: auto;
+    font-size: 5vw;
+    appearance: none;
     align-items: center;
     background-color: whitesmoke;
+    border-radius: 10px;
 }
 
-button:hover {
+.button:hover {
     background-color: white;
 }
 
-button:focus {
+.button:focus {
     outline: none;
 }
 
-button:active {
-    outline: none;
+#start:active {
     background-color: lawngreen;
 }
 
