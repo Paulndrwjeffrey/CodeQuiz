@@ -1,39 +1,56 @@
 const startButton = document.getElementById('start')
 const clockTime = document.getElementById('clock-time')
 const quizText = document.getElementById('quiztext')
-startButton.addEventListener('click', kickoff)
+const scores = document.getElementById('scoreboard')
+const aButtons = document.getElementsByClassName('answerbutton')
+const trueButton = document.getElementById('truebutton')
+const falseButton = document.getElementById('falsebutton')
+let score = 0
 
+const questions = [
+    {question: 'Javascript is fun.', answer: false },
+    {question: 'This quiz is dope.', answer: false },
+    {question: 'Curtis Mayfield\'s face should be on the 100 dollar bill.', answer: false },
+    {question: 'Paddington loves marmalade.', answer: true },
+    {question: 'La la means I love you.', answer: true },
+    {question: 'Thunder only happens when it\'s raining.', answer: false }
+]
 
- function clock() {
-    let time = 12;
+function quizStart() {
+    aButtons[0].style.visibility = 'visible';
+    aButtons[1].style.visibility = 'visible';
+    quizText.innerText = questions[0].question; 
+}
+
+function evaluate() {
+
+}
+
+function clock() {
+    let time = 60;
     let countdown = setInterval(() => {
         if (time >= 10) {
             clockTime.innerText = time;
-            console.log(time);
             time--;
         } else if (time <= 9 && time != 0) {
             clockTime.innerText = '0'+ time;
-            console.log(time);
             time--;        
         } else {
-            time = 0;
+             time = 0;
             clockTime.innerText = '00';
-            console.log('fuck');
             clearInterval(countdown);
-            }
+//show score? ---->
+        }
     }, 1000)
 }
-
+    
 function kickoff() {
-    startButton.style.visibility='hidden';
+    startButton.style.display = 'none';
     quizText.innerText = 'You will have 60 seconds to answer some questions... \nWrong answers will cost you time and self-esteem. \nGood luck!';
-    setTimeout(clock, 1000);
-    clearTimeout(kickoff);
+    setTimeout(clock, 3000);
+    setTimeout(quizStart, 5000);
 }
 
-
-
-// function scorekeeper()
-
-// function quiz()
-
+startButton.addEventListener('click', kickoff)
+trueButton.addEventListener('click', evaluate)
+falseButton.addEventListener('click', evaluate)
