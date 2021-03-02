@@ -6,15 +6,22 @@ const aButtons = document.getElementsByClassName('answerbutton')
 const trueButton = document.getElementById('truebutton')
 const falseButton = document.getElementById('falsebutton')
 let score = 0
+var time = 60
+let indexNumber = 0
+let userAnswer = Boolean(undefined)
+
 
 const questions = [
-    {question: 'Javascript is fun.', answer: false },
-    {question: 'This quiz is dope.', answer: false },
-    {question: 'Curtis Mayfield\'s face should be on the 100 dollar bill.', answer: false },
-    {question: 'Paddington loves marmalade.', answer: true },
-    {question: 'La la means I love you.', answer: true },
-    {question: 'Thunder only happens when it\'s raining.', answer: false }
+    {question: 'blepity blep blep bloop', answer: false },
+    {question: 'zweeee bop bop bop bop bada', answer: false },
+    {question: 'yooooo yooooo ixnay hohummity', answer: true },
+    {question: 'ooopum doopum beeeeeep', answer: true },
+    {question: 'beeep beeep booop bepede boop', answer: true },
+    {question: 'ummmm bah wah! ummm bah hah hah!', answer: false }
 ]
+
+// randomizes question order
+let randomQuestions = questions.sort(() => Math.random() - .5)
 
 function quizStart() {
     aButtons[0].style.visibility = 'visible';
@@ -22,12 +29,40 @@ function quizStart() {
     quizText.innerText = questions[0].question; 
 }
 
-function evaluate() {
+function nextQuest() {
+        ++indexNumber;
+        quizText.innerText = questions[indexNumber].question;
+}
+   
+function truthin() {
+    let userAnswer = true;
+    console.log(userAnswer);
+    judge();
+    nextQuest();
+}
 
+function falsin() {
+    let userAnswer = false;
+    console.log('uhhh... ' + userAnswer);
+    judge();
+    nextQuest();
+}
+
+function judge() {
+    if (questions[indexNumber].answer === userAnswer) {
+        console.log('judge says ' + questions[indexNumber].answer);
+        console.log('user guess: ' + userAnswer);
+        ++score;
+        console.log('score: ' + score);
+    } else {
+        console.log('judge says ' + questions[indexNumber].answer);
+        console.log('user guess: ' + userAnswer);
+        let time = (time - 10);
+        console.log('time: ' + time);
+    }
 }
 
 function clock() {
-    let time = 60;
     let countdown = setInterval(() => {
         if (time >= 10) {
             clockTime.innerText = time;
@@ -46,11 +81,14 @@ function clock() {
     
 function kickoff() {
     startButton.style.display = 'none';
-    quizText.innerText = 'You will have 60 seconds to answer some questions... \nWrong answers will cost you time and self-esteem. \nGood luck!';
+    quizText.innerText = 'You will have 60 seconds to answer some questions... \nWrong answers will cost you time. \nGood luck!';
     setTimeout(clock, 3000);
     setTimeout(quizStart, 5000);
 }
 
 startButton.addEventListener('click', kickoff)
-trueButton.addEventListener('click', evaluate)
-falseButton.addEventListener('click', evaluate)
+trueButton.addEventListener('click', truthin)
+falseButton.addEventListener('click', falsin)
+
+
+
