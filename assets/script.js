@@ -2,63 +2,76 @@ const startButton = document.getElementById('start')
 const clockTime = document.getElementById('clock-time')
 const quizText = document.getElementById('quiztext')
 const scores = document.getElementById('scoreboard')
-const aButtons = document.getElementsByClassName('answerbutton')
-const trueButton = document.getElementById('truebutton')
-const falseButton = document.getElementById('falsebutton')
+const answerButtons = document.getElementsByClassName('answerbuttons')
+const aButton = document.getElementById('abutton')
+const bButton = document.getElementById('bbutton')
 let score = 0
-var time = 60
 let indexNumber = 0
-let userAnswer = Boolean(undefined)
+let userAnswer = ''
+let time = 60
 
-
+//fix
 const questions = [
-    {question: 'blepity blep blep bloop', answer: false },
-    {question: 'zweeee bop bop bop bop bada', answer: false },
-    {question: 'yooooo yooooo ixnay hohummity', answer: true },
-    {question: 'ooopum doopum beeeeeep', answer: true },
-    {question: 'beeep beeep booop bepede boop', answer: true },
-    {question: 'ummmm bah wah! ummm bah hah hah!', answer: false }
+    {
+        question: 'The toBeach() method takes you to your closest body of water.',            
+        answer: 'b'
+    },
+    {
+        question: '"&&" is a logical operator meaning "neither"', 
+        answer: 'b'
+    },
+    {
+        question: '[] == ![]', 
+        answer: 'a'
+    },
+    {
+        question: 'undefined is more of a philosophy than a condition', 
+        answer: 'b'
+    },
+    {
+        question: '!!"false" === !!"true"', 
+        answer: 'a'
+    },
+    {
+        question: '"NAN" means "NOT A NUMBER', 
+        answer: 'a'
+    },
+    {
+        question: 'Javascript uses dynamic typing.',
+        answer: 'a'
+    },
+    {
+        question: 'It\'s happening again.',
+        answer: 'a'
+    },
+    {
+        question: '"++" means double-plus',
+        answer: 'b'
+    },
+    {
+        question: 'Thunder only happen when it\'s raining',
+        answer: 'b'
+    },
 ]
+
+console.log(questions);
 
 // randomizes question order
 let randomQuestions = questions.sort(() => Math.random() - .5)
+console.log(randomQuestions);
 
 function quizStart() {
-    aButtons[0].style.visibility = 'visible';
-    aButtons[1].style.visibility = 'visible';
-    quizText.innerText = questions[0].question; 
+    aButton.style.visibility = 'visible';
+    bButton.style.visibility = 'visible';
+    quizText.innerText = questions[indexNumber].question;
 }
 
 function nextQuest() {
-        ++indexNumber;
-        quizText.innerText = questions[indexNumber].question;
-}
-   
-function truthin() {
-    let userAnswer = true;
-    console.log(userAnswer);
-    judge();
-    nextQuest();
-}
-
-function falsin() {
-    let userAnswer = false;
-    console.log('uhhh... ' + userAnswer);
-    judge();
-    nextQuest();
-}
-
-function judge() {
-    if (questions[indexNumber].answer === userAnswer) {
-        console.log('judge says ' + questions[indexNumber].answer);
-        console.log('user guess: ' + userAnswer);
-        ++score;
-        console.log('score: ' + score);
+    ++indexNumber;
+    if (indexNumber < questions.length) {
+        quizText.innerText = questions[indexNumber].question; 
     } else {
-        console.log('judge says ' + questions[indexNumber].answer);
-        console.log('user guess: ' + userAnswer);
-        let time = (time - 10);
-        console.log('time: ' + time);
+        gameOver();
     }
 }
 
@@ -69,26 +82,70 @@ function clock() {
             time--;
         } else if (time <= 9 && time != 0) {
             clockTime.innerText = '0'+ time;
-            time--;        
+            time--;     
         } else {
-             time = 0;
+            time <= 0;
             clockTime.innerText = '00';
+            gameOver();
             clearInterval(countdown);
-//show score? ---->
         }
     }, 1000)
 }
-    
+
+function itsA() {
+    let userAnswer = 'a'
+    if (userAnswer == questions[indexNumber].answer) {
+       ++score;
+       correct();
+    } else {
+       wrong();
+    }
+   }
+
+
+function itsB() {
+    let userAnswer = 'b'
+    if (userAnswer == questions[indexNumber].answer) {
+       ++score;
+       correct();
+    } else {
+       wrong();
+    }
+   }
+
+function correct() {
+    quizText.innerText = 'CORRECT!';
+    setTimeout(nextQuest, 750);
+    clearInterval;
+}
+
+function wrong() {
+    quizText.innerText = 'WRONG!';
+    console.log(time);
+    time -= 20;
+    console.log(time);
+    setTimeout(nextQuest, 750);
+    clearInterval;
+}
+
 function kickoff() {
     startButton.style.display = 'none';
-    quizText.innerText = 'You will have 60 seconds to answer some questions... \nWrong answers will cost you time. \nGood luck!';
+    quizText.innerText = 'You have 60 seconds to answer some questions... \nWrong answers will cost you time. \nGood luck!';
     setTimeout(clock, 3000);
-    setTimeout(quizStart, 5000);
+    setTimeout(quizStart, 3000);
+}
+
+function gameOver() {
+    quizText.innerText = 'GAME OVER'
+    aButton.style.visibility = 'hidden';
+    bButton.style.visibility = 'hidden';
+    startButton.innerText = '-RESTART-';
+    startButton.style.display = 'unset';
+    console.log('you suck');
 }
 
 startButton.addEventListener('click', kickoff)
-trueButton.addEventListener('click', truthin)
-falseButton.addEventListener('click', falsin)
-
+aButton.addEventListener('click', itsA)
+bButton.addEventListener('click', itsB)
 
 
