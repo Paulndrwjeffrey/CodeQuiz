@@ -23,11 +23,12 @@ h1:hover {
     transform: skewx(4deg);    
 }
 
-h2 {
+#scoreboard {
+    background-color: cyan;
     font-size: 3.5vw;
 }
 
-h2:hover {
+#scoreboard:hover {
     color: Yellow;
     transform: skewx(6deg)
 }
@@ -120,3 +121,8 @@ pre:hover {
     color: whitesmoke;
 }
 
+input {
+    outline: none;
+    width: 5%;
+    display: none;
+}

@@ -6,11 +6,11 @@ const answerButtons = document.getElementsByClassName('answerbuttons')
 const aButton = document.getElementById('abutton')
 const bButton = document.getElementById('bbutton')
 let score = 0
-let indexNumber = 0
-let userAnswer = ''
-let time = 60
+var userAnswer = ''
+var scoreboard = []
+var indexNumber = 0
+var time = 60
 
-//fix
 const questions = [
     {
         question: 'The toBeach() method takes you to your closest body of water.',            
@@ -53,43 +53,44 @@ const questions = [
         answer: 'b'
     },
 ]
-
+// So you know the answers..
 console.log(questions);
 
-// randomizes question order
+// Randomizes question order
 let randomQuestions = questions.sort(() => Math.random() - .5)
 console.log(randomQuestions);
 
+// First question
 function quizStart() {
     aButton.style.visibility = 'visible';
     bButton.style.visibility = 'visible';
     quizText.innerText = questions[indexNumber].question;
-}
+} 
+
 
 function nextQuest() {
     ++indexNumber;
     if (indexNumber < questions.length) {
         quizText.innerText = questions[indexNumber].question; 
     } else {
-        gameOver();
+        
     }
-}
+} 
 
 function clock() {
     let countdown = setInterval(() => {
         if (time >= 10) {
             clockTime.innerText = time;
             time--;
-        } else if (time <= 9 && time != 0) {
+        } else if (time <= 9 && time >= 0) {
             clockTime.innerText = '0'+ time;
             time--;     
-        } else {
-            time <= 0;
+        } else if (time <= 0) {
             clockTime.innerText = '00';
             gameOver();
             clearInterval(countdown);
         }
-    }, 1000)
+    }, 1000) 
 }
 
 function itsA() {
@@ -116,7 +117,6 @@ function itsB() {
 function correct() {
     quizText.innerText = 'CORRECT!';
     setTimeout(nextQuest, 750);
-    clearInterval;
 }
 
 function wrong() {
@@ -125,7 +125,6 @@ function wrong() {
     time -= 20;
     console.log(time);
     setTimeout(nextQuest, 750);
-    clearInterval;
 }
 
 function kickoff() {
@@ -133,19 +132,34 @@ function kickoff() {
     quizText.innerText = 'You have 60 seconds to answer some questions... \nWrong answers will cost you time. \nGood luck!';
     setTimeout(clock, 3000);
     setTimeout(quizStart, 3000);
+
+} 
+function writeScore() {
+    let yrScore = (score * 666);
+    let inits = prompt('PLEASE ENTER YR INITIALS');
+    scoreboard.push(inits + ' - ' + yrScore);
+    console.log(scoreboard);
+    printScore();
 }
 
+function printScore() {
+   quizText.innerText = 'scores ' + scoreboard;
+}
+
+
 function gameOver() {
-    quizText.innerText = 'GAME OVER'
+    quizText.innerText = 'GAME OVER';
     aButton.style.visibility = 'hidden';
     bButton.style.visibility = 'hidden';
-    startButton.innerText = '-RESTART-';
     startButton.style.display = 'unset';
-    console.log('you suck');
-}
+    startButton.innerText = '-RESTART-';
+    indexNumber = 0;
+    time = 60;
+    console.log(time);
+    setTimeout(writeScore, 1000);
+} 
 
 startButton.addEventListener('click', kickoff)
 aButton.addEventListener('click', itsA)
 bButton.addEventListener('click', itsB)
-
-
+scores.addEventListener('click', printScore)
