@@ -53,12 +53,9 @@ const questions = [
         answer: 'b'
     },
 ]
-// So you know the answers..
-console.log(questions);
 
 // Randomizes question order
 let randomQuestions = questions.sort(() => Math.random() - .5)
-console.log(randomQuestions);
 
 // First question
 function quizStart() {
@@ -67,15 +64,14 @@ function quizStart() {
     quizText.innerText = questions[indexNumber].question;
 } 
 
-
 function nextQuest() {
     ++indexNumber;
     if (indexNumber < questions.length) {
         quizText.innerText = questions[indexNumber].question; 
     } else {
-        
+        gameOver();
     }
-} 
+}
 
 function clock() {
     let countdown = setInterval(() => {
@@ -121,9 +117,7 @@ function correct() {
 
 function wrong() {
     quizText.innerText = 'WRONG!';
-    console.log(time);
     time -= 20;
-    console.log(time);
     setTimeout(nextQuest, 750);
 }
 
@@ -143,7 +137,7 @@ function writeScore() {
 }
 
 function printScore() {
-   quizText.innerText = 'scores ' + scoreboard;
+   quizText.innerText = 'scores            ' + scoreboard;
 }
 
 
@@ -155,7 +149,6 @@ function gameOver() {
     startButton.innerText = '-RESTART-';
     indexNumber = 0;
     time = 60;
-    console.log(time);
     setTimeout(writeScore, 1000);
 } 
 
